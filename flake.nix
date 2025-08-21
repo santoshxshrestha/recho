@@ -1,5 +1,5 @@
 {
-  description = "A Nix-flake-based Rust development environment";
+  description = "A Nix-flake-based actix-web development environment";
 
   inputs = { nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable"; };
 
@@ -10,6 +10,7 @@
     in {
       devShells.${system}.default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          nodejs
           rustc
           cargo
           clippy
@@ -17,6 +18,13 @@
           openssl
           rust-analyzer
           pkg-config
+
+          yarn
+          pnpm
+          # nodePackages.typescript
+          nodePackages.eslint
+          nodePackages.prettier
+          nodePackages.typescript-language-server
         ];
 
         shellHook = ''
